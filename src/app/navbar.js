@@ -1,11 +1,13 @@
+import Link from "next/link";
+
 export default function Navbar() {
   return (
     <>
       <nav className="bg-white border-gray-200 pb-2 shadow-md">
         <div className="max-w-screen-xl h-20 flex flex-wrap items-center justify-between mx-auto p-4">
-          <a href="" className="flex items-center space-x-3 rtl:space-x-reverse">
+          <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
             <span className="self-center text-2xl font-semibold whitespace-nowrap">Discover Hospitals</span>
-          </a>
+          </Link>
           <button
             data-collapse-toggle="navbar-default"
             type="button"
@@ -48,7 +50,9 @@ export default function Navbar() {
             </ul>
           </div>
           <div className="space-x-3 font-medium text-sm">
-            <button className="w-20 h-11 shadow-sm rounded-lg border border-gray-200"> Login </button>
+            <Link href="/login">
+              <button className="w-20 h-11 shadow-sm rounded-lg border border-gray-200 hover:shadow-lg cl"> Login </button>
+            </Link>
             <button className="w-20 h-11 shadow-sm bg-blue-300 rounded-lg border border-gray-200"> Sign Up </button>
           </div>
         </div>

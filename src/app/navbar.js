@@ -23,7 +23,7 @@ export default function Navbar() {
           <div className="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
               <li>
-                <a href="" className="block py-2 px-3 text-black hover:text-sky-800 md:p-0" aria-current="page">
+                <a href="/" className="block py-2 px-3 text-black hover:text-sky-800 md:p-0" aria-current="page">
                   Home
                 </a>
               </li>
@@ -33,7 +33,7 @@ export default function Navbar() {
                 </a>
               </li>
               <li>
-                <a href="#" className="block py-2 px-3 text-black hover:text-sky-800 md:p-0" aria-current="page">
+                <a href="/map" className="block py-2 px-3 text-black hover:text-sky-800 md:p-0" aria-current="page">
                   Maps
                 </a>
               </li>

@@ -11,7 +11,7 @@ export default function MapPage() {
       <div>
         <Navbar />
         <div className="w-full h-screen p-20">
-          <MyMap />
+          <MyMap zoomSize={9.5} />
         </div>
       </div>
     </>

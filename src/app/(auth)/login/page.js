@@ -28,8 +28,7 @@ export default function Login() {
         if (!data.success) {
           console.log("Login Gagal");
         }
-        localStorage.setItem
-        console.log(data);
+        console.log(data.data.token);
         router.push("/");
       })
       .catch((error) => {

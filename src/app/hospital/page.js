@@ -7,12 +7,13 @@ async function getData() {
     const token = localStorage.getItem("token");
     console.log(token);
   }
-  const response = await fetch("http://127.0.0.1:8000/api/hospital", {
+  const url = "http://gis_2105551149.local.net/api";
+  const response = await fetch(url + "/hospital", {
     headers: {
       Authorization: "Bearer",
     },
   });
-  const data = await response.json()
+  const data = await response.json();
   return data;
 }
 

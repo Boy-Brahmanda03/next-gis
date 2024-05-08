@@ -13,7 +13,7 @@ export default function MapPage() {
   const token = Cookies.get("token");
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/hospital", {
+    fetch("${process.env.API_BASE_URL}/hospital", {
       headers: {
         Authorization: "Bearer" + token,
       },

@@ -2,7 +2,8 @@ import dotenv from "dotenv";
 
 /** @type {import('next').NextConfig} */
 
-dotenv.config();
 const nextConfig = {};
+
+dotenv.config();
 
 export default nextConfig;

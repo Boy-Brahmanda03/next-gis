@@ -11,7 +11,7 @@ export default function MapPage() {
   const [data, setData] = useState(null);
   //get token
   const token = Cookies.get("token");
-  const url = "http://gis_2105551149.local.net:3000/api";
+  const url = "http://gis_2105551149.local.net:3001/api";
   useEffect(() => {
     fetch(url + "/hospital", {
       headers: {

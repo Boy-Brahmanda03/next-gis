@@ -11,9 +11,9 @@ export default function MapPage() {
   const [data, setData] = useState(null);
   //get token
   const token = Cookies.get("token");
-
+  const url = "http://gis_2105551149.local.net:3000/api";
   useEffect(() => {
-    fetch("${process.env.API_BASE_URL}/hospital", {
+    fetch(url + "/hospital", {
       headers: {
         Authorization: "Bearer" + token,
       },

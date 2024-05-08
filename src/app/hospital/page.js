@@ -12,7 +12,7 @@ export default function Hospital() {
         return response.json();
       })
       .then((data) => {
-        data = setData;
+        setData(data.data);
         console.log(data.data);
       })
       .catch((error) => {

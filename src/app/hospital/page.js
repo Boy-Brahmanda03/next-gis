@@ -5,9 +5,15 @@ import { useEffect, useState } from "react";
 
 export default function Hospital() {
   const [data, setData] = useState(null);
+  //get token
+  const token = Cookies.get("token");
   const url = "http://gis_2105551149.local.net/api";
   useEffect(() => {
-    fetch(url + "/hospital")
+    fetch(url + "/hospital", {
+      headers: {
+        Authorization: "Bearer" + token,
+      },
+    })
       .then((response) => {
         return response.json();
       })
@@ -18,7 +24,7 @@ export default function Hospital() {
       .catch((error) => {
         console.log(error);
       });
-  });
+  }, [token]);
   return (
     <>
       <Navbar />

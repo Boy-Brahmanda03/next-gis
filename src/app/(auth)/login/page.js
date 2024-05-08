@@ -13,8 +13,8 @@ export default function Login() {
 
   const loginHandler = (e) => {
     e.preventDefault();
-
-    fetch("http://127.0.0.1:8000/api/login", {
+    const url = process.env.NEXT_PUBLIC_API_URL;
+    fetch(url + "/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

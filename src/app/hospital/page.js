@@ -7,13 +7,22 @@ async function getData() {
     const token = localStorage.getItem("token");
     console.log(token);
   }
+  let data = null;
   const url = "http://gis_2105551149.local.net/api";
-  const response = await fetch(url + "/hospital", {
-    headers: {
-      Authorization: "Bearer",
-    },
-  });
-  const data = await response.json();
+  try {
+    const response = await fetch(url + "/hospital", {
+      headers: {
+        Authorization: "Bearer " + token, // Pastikan ada spasi setelah "Bearer"
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Terjadi kesalahan saat memuat data");
+    }
+    data = await response.json();
+    console.log(data.data);
+  } catch (error) {
+    console.error("Terjadi kesalahan:", error);
+  }
   return data;
 }
 

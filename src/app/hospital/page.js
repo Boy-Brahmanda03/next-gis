@@ -2,19 +2,9 @@ import Navbar from "../navbar";
 import Image from "next/image";
 
 async function getData() {
-  if (typeof window !== "undefined") {
-    // Client-side-only code
-    const token = localStorage.getItem("token");
-    console.log(token);
-  }
-  let data = null;
   const url = "http://gis_2105551149.local.net/api";
   try {
-    const response = await fetch(url + "/hospital", {
-      headers: {
-        Authorization: "Bearer " + token, // Pastikan ada spasi setelah "Bearer"
-      },
-    });
+    const response = await fetch(url + "/hospital");
     if (!response.ok) {
       throw new Error("Terjadi kesalahan saat memuat data");
     }

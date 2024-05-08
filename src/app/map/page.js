@@ -11,9 +11,9 @@ export default function MapPage() {
   const [data, setData] = useState(null);
   //get token
   const token = Cookies.get("token");
-
+  const url = process.env.API_BASE_URL
   useEffect(() => {
-    fetch("${process.env.API_BASE_URL}/hospital", {
+    fetch(url + "/hospital", {
       headers: {
         Authorization: "Bearer" + token,
       },

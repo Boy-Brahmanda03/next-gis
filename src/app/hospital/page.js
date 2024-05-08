@@ -3,6 +3,7 @@ import Image from "next/image";
 
 async function getData() {
   const url = "http://gis_2105551149.local.net/api";
+  let data;
   try {
     const response = await fetch(url + "/hospital");
     if (!response.ok) {

@@ -13,12 +13,15 @@ export default function Hospital() {
       })
       .then((data) => {
         setData(data.data);
+        if (data == null) {
+          console.log("data kosong");
+        }
         console.log(data.data);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [token]);
+  });
   return (
     <>
       <Navbar />

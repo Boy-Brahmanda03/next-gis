@@ -3,6 +3,7 @@ import Image from "next/image";
 
 export default function Hospital() {
   let datas = null;
+  const url = "http://gis_2105551149.local.net/api";
   fetch(url + "/hospital")
     .then((response) => {
       return response.json();

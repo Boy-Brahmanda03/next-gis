@@ -5,12 +5,17 @@ import MarkerClusterGroup from "react-leaflet-cluster";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-export default function Map({ zoomSize }) {
-  const position = [
-    { pos: [-8.79106, 115.1768667], namaRs: "RS" },
-    { pos: [-8.7903559, 115.1742566], namaRs: "RS" },
-    { pos: [-8.8041261, 115.2172655], namaRs: "RS" },
-  ];
+export default function Map({ zoomSize, data }) {
+  let position = []
+  if(data == null){
+    position = [
+      { lat: -8.79106, lng: 115.1768667, name: "RS" },
+      { lat: -8.7903559, lng: 115.1742566, name: "RS" },
+      { lat: -8.8041261, lng: 115.2172655, name: "RS" },
+    ];
+  } else {
+    position = data
+  }
 
   const markerIcon = L.icon({
     iconUrl: "https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-512.png",
@@ -23,8 +28,8 @@ export default function Map({ zoomSize }) {
         <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <MarkerClusterGroup>
           {position.map((marker, index) => (
-            <Marker key={index} position={marker.pos} icon={markerIcon}>
-              <Popup>{marker.namaRs}</Popup>
+            <Marker key={index} position={[marker.lat, marker.lng]} icon={markerIcon}>
+              <Popup>{marker.name}</Popup>
             </Marker>
           ))}
         </MarkerClusterGroup>

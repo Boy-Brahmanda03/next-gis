@@ -4,6 +4,7 @@ import Image from "next/image";
 import mockupLogin from "/public/login-bro.png";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -21,7 +22,6 @@ export default function Login() {
       body: JSON.stringify({ email, password }),
     })
       .then((response) => {
-        console.log(response);
         return response.json();
       })
       .then((data) => {
@@ -29,6 +29,10 @@ export default function Login() {
           console.log("Login Gagal");
         }
         console.log(data.data.token);
+        const token = Cookies.get();
+        console.log();
+        localStorage.setItem("token", data.data.token);
+        Cookies.set("token", data.data.token);
         router.push("/");
       })
       .catch((error) => {

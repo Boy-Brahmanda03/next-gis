@@ -1,6 +1,40 @@
-import Link from "next/link";
+"use client";
 
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import Cookies from "js-cookie";
+
+const ProfileButton = () => {
+  return (
+    <div className="flex justify-center items-center border border-black">
+      <p>Username</p>
+      <button className="w-11 h-11 shadow-sm rounded-full border border-gray-200 hover:shadow-lg cl" onClick={Cookies.remove("token")}></button>
+    </div>
+  );
+};
+
+const AuthButton = () => {
+  return (
+    <div>
+      <Link href="/login">
+        <button className="w-20 h-11 shadow-sm rounded-lg border border-gray-200 hover:shadow-lg cl"> Login </button>
+      </Link>
+      <Link href="/register">
+        <button className="w-20 h-11 shadow-sm bg-blue-300 rounded-lg border border-gray-200"> Sign Up </button>
+      </Link>
+    </div>
+  );
+};
 export default function Navbar() {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const token = Cookies.get("token");
+  useEffect(() => {
+    if (token) {
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+  }, [token]);
   return (
     <>
       <nav className="bg-white border-gray-200 pb-2 shadow-md">
@@ -23,38 +57,33 @@ export default function Navbar() {
           <div className="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
               <li>
-                <a href="/" className="block py-2 px-3 text-black hover:text-sky-800 md:p-0" aria-current="page">
+                <Link href="/" className="block py-2 px-3 text-black hover:text-sky-800 md:p-0" aria-current="page">
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/hospital" className="block py-2 px-3 text-black hover:text-sky-800 md:p-0" aria-current="page">
+                <Link href="/hospital" className="block py-2 px-3 text-black hover:text-sky-800 md:p-0" aria-current="page">
                   Hospital
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/map" className="block py-2 px-3 text-black hover:text-sky-800 md:p-0" aria-current="page">
+                <Link href="/map" className="block py-2 px-3 text-black hover:text-sky-800 md:p-0" aria-current="page">
                   Maps
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="block py-2 px-3 text-black hover:text-sky-800 md:p-0" aria-current="page">
+                <Link href="#" className="block py-2 px-3 text-black hover:text-sky-800 md:p-0" aria-current="page">
                   About
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="block py-2 px-3 text-black hover:text-sky-800 md:p-0" aria-current="page">
+                <Link href="#" className="block py-2 px-3 text-black hover:text-sky-800 md:p-0" aria-current="page">
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
-          <div className="space-x-3 font-medium text-sm">
-            <Link href="/login">
-              <button className="w-20 h-11 shadow-sm rounded-lg border border-gray-200 hover:shadow-lg cl"> Login </button>
-            </Link>
-            <button className="w-20 h-11 shadow-sm bg-blue-300 rounded-lg border border-gray-200"> Sign Up </button>
-          </div>
+          <div className="space-x-3 font-medium text-sm">{loggedIn ? ProfileButton() : AuthButton()}</div>
         </div>
       </nav>
     </>

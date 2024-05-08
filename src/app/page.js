@@ -1,9 +1,10 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Navbar from "./navbar";
 import Hero from "./hero";
 import Footer from "./footer";
+import dynamic from "next/dynamic";
+import Cookies from "js-cookie";
 
 const MyMap = dynamic(() => import("./map"), { ssr: false });
 

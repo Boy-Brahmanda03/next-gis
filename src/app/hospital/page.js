@@ -6,7 +6,7 @@ import bimc from "/public/bimc.png";
 
 export default function Hospital() {
   const [data, setData] = useState(null);
-  const url = "http://gis_2105551149.local.net/api";
+  const url = process.env.NEXT_PUBLIC_API_URL;
   useEffect(() => {
     fetch(url + "/hospital")
       .then((response) => {
@@ -32,8 +32,8 @@ export default function Hospital() {
           data.map((data) => (
             <div key={data.id}>
               <div className="h-fit grid grid-cols-1 p-8 shadow-md rounded-lg border border-gray-200 hover:shadow-lg">
-                <Image src={bimc} height={200} alt="bimc" />
-                <p className="mt-5 mb-3 text-xl font-semibold border border-black">{data.name}</p>
+                <Image src={data.gambar ? data.gambar : bimc} height={200} alt="bimc" />
+                <p className="mt-5 mb-3 text-xl font-semibold">{data.name}</p>
                 <p>{data.alamat}</p>
                 <p>{data.lat}</p>
                 <p>{data.lng}</p>

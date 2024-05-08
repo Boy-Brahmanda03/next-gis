@@ -1,26 +1,30 @@
+"use client";
 import Navbar from "../navbar";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function Hospital() {
-  let datas = null;
+  const [data, setData] = useState(null);
   const url = "http://gis_2105551149.local.net/api";
-  fetch(url + "/hospital")
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      datas = data;
-      console.log(data.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  useEffect(() => {
+    fetch(url + "/hospital")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        data = setData;
+        console.log(data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
   return (
     <>
       <Navbar />
       <h1 className="px-24 p-8 font-bold text-3xl">Hospital List</h1>
       <div className="grid grid-cols-4 mx-auto px-24 gap-5">
-        {datas.map((data) => (
+        {data.map((data) => (
           <div key={data.id}>
             <div className="h-fit grid grid-cols-1 p-8 shadow-md rounded-lg border border-gray-200 hover:shadow-lg">
               <Image src={bimc} height={200} alt="bimc" />

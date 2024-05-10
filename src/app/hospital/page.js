@@ -1,9 +1,11 @@
+"use client";
+
 import Navbar from "../navbar";
 import Card from "@/app/hospital/card";
 
 async function getData() {
-  const url = process.env.NEXT_PUBLIC_API_URL;
   try {
+    const url = process.env.NEXT_PUBLIC_API_URL;
     const res = await fetch(url + "/hospital", {
       method: "GET",
       headers: {
@@ -21,8 +23,10 @@ async function getData() {
   }
 }
 
-export default async function Hospital() {
-  const hospitals = await getData();
+export default function Hospital() {
+  const hospitals = async () => {
+    await getData();
+  };
   console.log(hospitals);
   return (
     <>

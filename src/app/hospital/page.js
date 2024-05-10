@@ -1,5 +1,3 @@
-"use client";
-
 import Navbar from "../navbar";
 import Card from "@/app/hospital/card";
 
@@ -23,10 +21,8 @@ async function getData() {
   }
 }
 
-export default function Hospital() {
-  const hospitals = async () => {
-    return await getData();
-  };
+export default async function Hospital() {
+  const hospitals = await getData();
   console.log(hospitals);
   return (
     <>

@@ -6,7 +6,7 @@ import Image from "next/image";
 async function processData(id, formData) {
   console.log("FormData in processData:", formData);
   try {
-    const url = process.env.NEXT_SERVER_PUBLIC_API_URL;
+    const url = process.env.NEXT_CLIENT_PUBLIC_API_URL;
     const res = await fetch(url + "/hospital/" + id, {
       method: "POST",
       body: formData,

@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import { format } from "prettier";
 
 /** @type {import('next').NextConfig} */
 dotenv.config();

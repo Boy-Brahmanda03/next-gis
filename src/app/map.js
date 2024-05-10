@@ -2,19 +2,20 @@
 
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
+import Image from "next/image";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { useRouter } from "next/navigation";
 
 export default function Map({ zoomSize, data }) {
-  let position = []
-  if(data == null){
-    position = [
-      { lat: -8.79106, lng: 115.1768667, name: "RS" },
-      { lat: -8.7903559, lng: 115.1742566, name: "RS" },
-      { lat: -8.8041261, lng: 115.2172655, name: "RS" },
-    ];
-  } else {
-    position = data
+  const router = useRouter();
+  const handleClick = (id) => {
+    router.push("hospital/detail/" + id);
+  };
+  let position = [];
+  if (data != null) {
+    position = data;
+    console.log(data);
   }
 
   const markerIcon = L.icon({
@@ -29,7 +30,18 @@ export default function Map({ zoomSize, data }) {
         <MarkerClusterGroup>
           {position.map((marker, index) => (
             <Marker key={index} position={[marker.lat, marker.lng]} icon={markerIcon}>
-              <Popup>{marker.name}</Popup>
+              <Popup className="w-64">
+                <h1 className="text-lg font-bold">{marker.name}</h1>
+                <Image
+                  className="aspect-video w-auto object-cover object-center mt-2 rounded-xl"
+                  src={marker.gambar ? `data:image/jpeg;base64,${marker.gambar}` : marker.gambar}
+                  width={200}
+                  height={200}
+                  alt={marker.name}
+                  onClick={() => handleClick(marker.id)}
+                />
+                <p className="text-sm text-gray-300 font-medium">Click image for details</p>
+              </Popup>
             </Marker>
           ))}
         </MarkerClusterGroup>

@@ -1,35 +1,23 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Navbar from "../navbar";
 import dynamic from "next/dynamic";
-import Cookies from "js-cookie";
 
-const MyMap = dynamic(() => import("../map"), { ssr: false });
+const MyMap = dynamic(() => import("./map"), { ssr: false });
 
-export default function MapPage() {
-  const [data, setData] = useState(null);
-  //get token
-  const token = Cookies.get("token");
-  const url = process.env.NEXT_CLIENT_PUBLIC_API_URL;
-  useEffect(() => {
-    fetch(url + "/hospital", {
-      headers: {
-        Authorization: "Bearer" + token,
-      },
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setData(data.data);
-        console.log(data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [token, url]);
+async function getData() {
+  const url = process.env.NEXT_SERVER_PUBLIC_API_URL;
+  const res = await fetch(url + "/hospital", {
+    method: "GET",
+  });
 
+  if (!res.ok) {
+    throw new Error("Error fetching data!");
+  }
+  return res.json();
+}
+
+export default async function MapPage() {
+  const data = await getData();
+  console.log(data);
   return (
     <>
       <div>

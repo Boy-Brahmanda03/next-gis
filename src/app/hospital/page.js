@@ -15,11 +15,10 @@ async function getData() {
     if (!res.ok) {
       throw new Error("Error fetching data!");
     }
+    return res.json();
   } catch (error) {
     console.error("Fetch error:", error);
   }
-
-  return res.json();
 }
 
 export default async function Hospital() {

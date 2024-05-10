@@ -11,7 +11,7 @@ async function processData(id, formData, url) {
   return res.json();
 }
 
-export default function Form({ data, url }) {
+export default function Form({ data }) {
   const [hospitalName, setHospitalName] = useState(data.name);
   const [hospitalAddress, setHospitalAddress] = useState(data.address);
   const [hospitalType, setHospitalType] = useState(data.type);
@@ -39,6 +39,7 @@ export default function Form({ data, url }) {
 
   const saveHandler = async () => {
     const formData = new FormData();
+    const url = "http://gis_2105551149.local.net/api"
     formData.append("h_name", hospitalName);
     formData.append("address", hospitalAddress);
     formData.append("type", hospitalType);

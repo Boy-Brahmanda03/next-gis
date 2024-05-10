@@ -22,7 +22,7 @@ export default async function DetailPage({ params }) {
   return (
     <div>
       <Navbar />
-      <Form data={hospital.data} url={url} />
+      <Form data={hospital.data} />
     </div>
   );
 }

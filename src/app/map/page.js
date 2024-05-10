@@ -28,7 +28,7 @@ export default function MapPage() {
       .catch((error) => {
         console.log(error);
       });
-  }, [token]);
+  }, [token, url]);
 
   return (
     <>

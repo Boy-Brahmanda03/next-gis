@@ -5,6 +5,7 @@ import Hero from "./hero";
 import Footer from "./footer";
 import dynamic from "next/dynamic";
 import Cookies from "js-cookie";
+import Link from "next/link";
 
 const MyMap = dynamic(() => import("./map"), { ssr: false });
 
@@ -22,7 +23,9 @@ export default function Home() {
           <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl">
             Find the nearest hospitals in Bali with ease. Search for locations, services, and other essential information for your and your family health needs.
           </p>
-          <button className="w-fit h-15 rounded-xl bg-blue-300 border border-gray-200 shadow-sm text-center p-3 hover:shadow-md">Start Exploring Now!</button>
+          <Link href={"/map"}>
+            <button className="w-fit h-15 rounded-xl bg-blue-300 border border-gray-200 shadow-sm text-center p-3 hover:shadow-md">Start Exploring Now!</button>
+          </Link>
         </div>
       </div>
       <Footer />

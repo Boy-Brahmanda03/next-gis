@@ -14,7 +14,7 @@ export default function Card({ data }) {
     hospitals.data.map((data) => (
       <div key={data.id} onClick={() => handleClick(data.id)}>
         <div className="flex flex-col w-60 justify-center bg-white rounded-2xl shadow-xl shadow-slate-300/60 hover:shadow-2xl">
-          <Image className="aspect-video w-auto rounded-t-2xl object-cover object-center" src={data.gambar ? `data:image/jpeg;base64,${data.gambar}` : bimc} height={300} width={200} alt="${data.nama}" />
+          <Image className="aspect-video w-auto rounded-t-2xl object-cover object-center" src={`data:image/jpeg;base64,${data.gambar}`} height={300} width={200} alt="${data.nama}" />
           <div class="h-40 p-4">
             <small class="text-blue-400 text-xs">{data.tipe ? "Tipe " + data.tipe : "Tipe"}</small>
             <h1 class="text-2xl font-medium text-slate-600 pb-2">{data.name}</h1>

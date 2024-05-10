@@ -25,7 +25,7 @@ async function getData() {
 
 export default function Hospital() {
   const hospitals = async () => {
-    await getData();
+    return await getData();
   };
   console.log(hospitals);
   return (

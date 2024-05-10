@@ -39,14 +39,16 @@ export default function Form({ data }) {
 
   const saveHandler = async () => {
     const formData = new FormData();
-    const url = "http://gis_2105551149.local.net/api"
+    const url = "http://gis_2105551149.local.net/api";
     formData.append("h_name", hospitalName);
     formData.append("address", hospitalAddress);
     formData.append("type", hospitalType);
     formData.append("picture", hospitalImageFile);
     console.log("FormData in saveHandler:", formData);
     const res = await processData(data.id, formData, url);
-    console.log(res);
+    if (res.success) {
+      alert(res.message);
+    }
   };
 
   return (

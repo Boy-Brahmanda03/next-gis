@@ -7,6 +7,7 @@ async function getData() {
   const url = process.env.NEXT_SERVER_PUBLIC_API_URL;
   const res = await fetch(url + "/hospital", {
     method: "GET",
+    cache: "no-store",
   });
 
   if (!res.ok) {

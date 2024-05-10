@@ -15,7 +15,7 @@ const ProfileButton = () => {
 
 const AuthButton = () => {
   return (
-    <div>
+    <div className="grid grid-cols-2 gap-3">
       <Link href="/login">
         <button className="w-20 h-11 shadow-sm rounded-lg border border-gray-200 hover:shadow-lg cl"> Login </button>
       </Link>

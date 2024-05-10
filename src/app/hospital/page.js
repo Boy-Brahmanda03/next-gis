@@ -3,16 +3,20 @@ import Card from "@/app/hospital/card";
 
 async function getData() {
   const url = process.env.NEXT_PUBLIC_API_URL;
-  const res = await fetch(url + "/hospital", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    cache: "no-store",
-  });
+  try {
+    const res = await fetch(url + "/hospital", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      cache: "no-store",
+    });
 
-  if (!res.ok) {
-    throw new Error("Error fetching data!");
+    if (!res.ok) {
+      throw new Error("Error fetching data!");
+    }
+  } catch (error) {
+    console.error("Fetch error:", error);
   }
 
   return res.json();

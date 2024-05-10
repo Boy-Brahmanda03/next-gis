@@ -4,16 +4,11 @@ import { useState, useRef } from "react";
 import Image from "next/image";
 
 async function processData(id, formData, url) {
-  console.log("FormData in processData:", formData);
-  try {
-    const res = await fetch(url + "/hospital/" + id, {
-      method: "POST",
-      body: formData,
-    });
-    return res.json();
-  } catch (error) {
-    console.log(error);
-  }
+  const res = await fetch(url + "/hospital/" + id, {
+    method: "POST",
+    body: formData,
+  });
+  return res.json();
 }
 
 export default function Form({ data, url }) {
@@ -50,12 +45,7 @@ export default function Form({ data, url }) {
     formData.append("picture", hospitalImageFile);
     console.log("FormData in saveHandler:", formData);
     const res = await processData(data.id, formData, url);
-    if (res.success) {
-      console.log(res);
-      alert(res.message);
-    } else {
-      alert("");
-    }
+    console.log(res);
   };
 
   return (

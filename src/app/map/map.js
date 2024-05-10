@@ -14,7 +14,7 @@ export default function Map({ zoomSize, data }) {
   };
   let position = [];
   if (data != null) {
-    position = data;
+    position = data.data;
     console.log(data);
   }
 

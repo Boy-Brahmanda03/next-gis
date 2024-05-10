@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 import Cookies from "js-cookie";
 import Link from "next/link";
 
-const MyMap = dynamic(() => import("./map"), { ssr: false });
+const MyMap = dynamic(() => import("./map/map"), { ssr: false });
 
 export default function Home() {
   return (

@@ -1,45 +1,32 @@
-"use client";
 import Navbar from "../navbar";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import bimc from "/public/bimc.png";
+import Card from "@/app/hospital/card";
 
-export default function Hospital() {
-  const [data, setData] = useState(null);
+async function getData() {
   const url = process.env.NEXT_PUBLIC_API_URL;
-  useEffect(() => {
-    fetch(url + "/hospital")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setData(data.data);
-        if (data == null) {
-          console.log("data kosong");
-        }
-        console.log(data.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  const res = await fetch(url + "/hospital", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Error fetching data!");
+  }
+
+  return res.json();
+}
+
+export default async function Hospital() {
+  const hospitals = await getData();
+  console.log(hospitals);
   return (
     <>
       <Navbar />
       <h1 className="px-24 p-8 font-bold text-3xl">Hospital List</h1>
-      <div className="grid grid-cols-4 mx-auto px-24 gap-5">
-        {data &&
-          data.map((data) => (
-            <div key={data.id}>
-              <div className="h-fit grid grid-cols-1 p-8 shadow-md rounded-lg border border-gray-200 hover:shadow-lg">
-                <Image src={data.gambar ? data.gambar : bimc} height={200} alt="bimc" />
-                <p className="mt-5 mb-3 text-xl font-semibold">{data.name}</p>
-                <p>{data.alamat}</p>
-                <p>{data.lat}</p>
-                <p>{data.lng}</p>
-              </div>
-            </div>
-          ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 px-24 py-4">
+        <Card data={hospitals} />
       </div>
     </>
   );

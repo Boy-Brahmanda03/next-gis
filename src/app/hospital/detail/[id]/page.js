@@ -1,8 +1,7 @@
 import Navbar from "@/app/navbar";
 import Form from "./form";
 
-async function getData(id) {
-  const url = process.env.NEXT_SERVER_PUBLIC_API_URL;
+async function getData(id, url) {
   const res = await fetch(url + "/hospital/" + id, {
     method: "GET",
     headers: {
@@ -17,12 +16,13 @@ async function getData(id) {
 }
 
 export default async function DetailPage({ params }) {
-  const hospital = await getData(params.id);
+  const url = process.env.NEXT_SERVER_PUBLIC_API_URL;
+  const hospital = await getData(params.id, url);
   console.log(hospital);
   return (
     <div>
       <Navbar />
-      <Form data={hospital.data}/>
+      <Form data={hospital.data} url={url} />
     </div>
   );
 }

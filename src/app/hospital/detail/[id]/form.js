@@ -3,10 +3,9 @@
 import { useState, useRef } from "react";
 import Image from "next/image";
 
-async function processData(id, formData) {
+async function processData(id, formData, url) {
   console.log("FormData in processData:", formData);
   try {
-    const url = process.env.NEXT_CLIENT_PUBLIC_API_URL;
     const res = await fetch(url + "/hospital/" + id, {
       method: "POST",
       body: formData,
@@ -17,7 +16,7 @@ async function processData(id, formData) {
   }
 }
 
-export default function Form({ data }) {
+export default function Form({ data, url }) {
   const [hospitalName, setHospitalName] = useState(data.name);
   const [hospitalAddress, setHospitalAddress] = useState(data.address);
   const [hospitalType, setHospitalType] = useState(data.type);
@@ -50,7 +49,7 @@ export default function Form({ data }) {
     formData.append("type", hospitalType);
     formData.append("picture", hospitalImageFile);
     console.log("FormData in saveHandler:", formData);
-    const res = await processData(data.id, formData);
+    const res = await processData(data.id, formData, url);
     if (res.success) {
       console.log(res);
       alert(res.message);

@@ -2,7 +2,7 @@ import Navbar from "@/app/navbar";
 import Form from "./form";
 
 async function getData(id) {
-  const url = process.env.NEXT_PUBLIC_API_URL;
+  const url = process.env.NEXT_SERVER_PUBLIC_API_URL;
   const res = await fetch(url + "/hospital/" + id, {
     method: "GET",
     headers: {

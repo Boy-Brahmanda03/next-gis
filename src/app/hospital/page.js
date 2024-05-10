@@ -3,7 +3,7 @@ import Card from "@/app/hospital/card";
 
 async function getData() {
   try {
-    const url = process.env.NEXT_PUBLIC_API_URL;
+    const url = process.env.NEXT_SERVER_PUBLIC_API_URL;
     const res = await fetch(url + "/hospital", {
       method: "GET",
       headers: {

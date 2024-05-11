@@ -4,15 +4,16 @@ import Navbar from "./navbar";
 import Hero from "./hero";
 import Footer from "./footer";
 import dynamic from "next/dynamic";
-import Cookies from "js-cookie";
 import Link from "next/link";
 
 const MyMap = dynamic(() => import("./map/map"), { ssr: false });
 
 export default function Home() {
+  const token = localStorage.getItem("token");
+
   return (
     <>
-      <Navbar />
+      <Navbar token={token} />
       <Hero />
       <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
         <div className="w-full h-96  lg:col-span-6 pr-5">

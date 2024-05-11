@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Navbar from "../navbar";
 import dynamic from "next/dynamic";
 
@@ -16,16 +19,36 @@ async function getData() {
   return res.json();
 }
 
-export default async function MapPage() {
-  const data = await getData();
-  console.log(data);
+export default function MapPage() {
+  const [token, setToken] = useState();
+  const [hospitals, setHospitals] = useState();
+
+  useEffect(() => {
+    setToken(localStorage.getItem("token"));
+  }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/api/hospital", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+      cache: "no-store",
+    })
+      .then((res) => {
+        console.log(res);
+        return res.json();
+      })
+      .then((data) => {
+        setHospitals(data);
+      });
+  }, [token]);
+
   return (
     <>
       <div>
         <Navbar />
-        <div className="w-full h-screen p-20">
-          <MyMap zoomSize={9.5} data={data} />
-        </div>
+        <div className="w-full h-screen p-20">{hospitals && hospitals.success ? <MyMap zoomSize={9.5} data={hospitals} /> : <p>salah cuy</p>}</div>
       </div>
     </>
   );

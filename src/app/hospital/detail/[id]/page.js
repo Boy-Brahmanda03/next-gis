@@ -1,28 +1,44 @@
+"use client";
+
 import Navbar from "@/app/navbar";
 import Form from "./form";
+import { useEffect, useState } from "react";
 
-async function getData(id, url) {
-  const res = await fetch(url + "/hospital/" + id, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    cache: "no-store",
-  });
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  return res.json();
-}
 
-export default async function DetailPage({ params }) {
-  const url = process.env.NEXT_SERVER_PUBLIC_API_URL;
-  const hospital = await getData(params.id, url);
+export default function DetailPage({ params }) {
+  const [token, setToken] = useState();
+  const [hospital, setHospital] = useState();
+
+  useEffect(() => {
+    setToken(localStorage.getItem("token"));
+  }, []);
+
+  useEffect(() => {
+    const id = params.id;
+    fetch("http://localhost:8000/api/hospital/" + id, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+      cache: "no-store",
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setHospital(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, [token]);
+
   console.log(hospital);
   return (
     <div>
-      <Navbar />
-      <Form data={hospital.data} />
+      <Navbar token={token} />
+      {hospital && hospital.success == true ? <Form data={hospital.data} /> : <p>Salah cuy</p>}
     </div>
   );
 }

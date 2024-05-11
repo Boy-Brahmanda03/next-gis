@@ -1,23 +1,44 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import CloseIcon from "/public/close-icon.png";
 
-async function processData(id, formData, url) {
+async function processData(id, formData, url, token) {
   const res = await fetch(url + "/hospital/" + id, {
     method: "POST",
+    headers: {
+      Authorization: "Bearer" + token,
+    },
     body: formData,
   });
   return res.json();
 }
 
+async function deleteData(id, url, token) {
+  const res = await fetch(url + "/hospital/" + id, {
+    method: "DELETE",
+    headers: {
+      Authorization: "Bearer" + token,
+    },
+  });
+  return res.json();
+}
+
 export default function Form({ data }) {
+  const [token, setToken] = useState();
   const [hospitalName, setHospitalName] = useState(data.name);
   const [hospitalAddress, setHospitalAddress] = useState(data.address);
   const [hospitalType, setHospitalType] = useState(data.type);
   const [hospitalImage, setHospitalImage] = useState(null);
   const [hospitalImageFile, setHospitalImageFile] = useState(null);
   const fileInputRef = useRef(null);
+  const r = useRouter();
+
+  useEffect(() => {
+    setToken(localStorage.getItem("token"));
+  }, []);
 
   const cancelHandler = () => {
     setHospitalName(data.name);
@@ -39,15 +60,27 @@ export default function Form({ data }) {
 
   const saveHandler = async () => {
     const formData = new FormData();
-    const url = "http://gis_2105551149.local.net/api";
+    const url = "http://localhost:8000/api";
     formData.append("h_name", hospitalName);
     formData.append("address", hospitalAddress);
     formData.append("type", hospitalType);
     formData.append("picture", hospitalImageFile);
     console.log("FormData in saveHandler:", formData);
-    const res = await processData(data.id, formData, url);
+    const res = await processData(data.id, formData, url, token);
+    console.log(res);
     if (res.success) {
+      r.prefetch("/hospital");
       alert(res.message);
+      r.push("/hospital");
+    }
+  };
+
+  const deleteHandler = async () => {
+    const url = "http://localhost:8000/api";
+    const res = await deleteData(data.id, url, token);
+    if (res.success) {
+      r.prefetch("/hospital");
+      r.push("/hospital");
     }
   };
 
@@ -60,8 +93,8 @@ export default function Form({ data }) {
         <div className="bg-white shadow-lg rounded-lg flex-1 border border-gray-200">
           <div className="flex mb-3">
             <h2 className="flex-1 font-sans font-bold text-3xl ms-5 my-5 text-black">Hospital Data</h2>
-            <button id="edit" className="me-8 justify-end items-end">
-              <Image id="img_btn" src="" className="size-6" alt="" width={200} height={200} />
+            <button className="me-8 justify-end items-end" onClick={deleteHandler}>
+              <Image src={CloseIcon} className="size-6" alt="" width={200} height={200} />
             </button>
           </div>
           <div className="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">

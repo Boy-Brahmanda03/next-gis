@@ -6,12 +6,11 @@ import Button from "./button";
 import { useEffect, useState } from "react";
 
 export default function Hospital() {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState();
   const [hospitals, setHospitals] = useState();
 
   useEffect(() => {
-    const tokenFromStorage = localStorage.getItem("token");
-    setToken(tokenFromStorage);
+    setToken(localStorage.getItem("token"));
   }, []);
 
   console.log(token);

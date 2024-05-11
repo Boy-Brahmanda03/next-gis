@@ -47,7 +47,7 @@ export default function MapPage() {
   return (
     <>
       <div>
-        <Navbar />
+        <Navbar token={token} />
         <div className="w-full h-screen p-20">{hospitals && hospitals.success ? <MyMap zoomSize={9.5} data={hospitals} /> : <p>salah cuy</p>}</div>
       </div>
     </>

@@ -2,7 +2,8 @@
 
 import { useState, useRef } from "react";
 import Image from "next/image";
-import siloam from "/public/siloam.png";
+import CloseIcon from "/public/close-icon.png";
+import { useRouter } from "next/navigation";
 
 async function processData(formData, url) {
   const res = await fetch(url + "/hospital/", {
@@ -21,6 +22,11 @@ export default function AddHospitalPage() {
   const [hospitalLat, setHospitalLat] = useState(null);
   const [hospitalLng, setHospitalLng] = useState(null);
   const fileInputRef = useRef(null);
+  const r = useRouter();
+
+  const closeHandler = () => {
+    r.back();
+  };
 
   const cancelHandler = () => {
     setHospitalName(null);
@@ -61,14 +67,11 @@ export default function AddHospitalPage() {
   return (
     <div id="info">
       <div className="flex justify-between mx-16 my-11">
-        <div className="flex w-1/2 h-auto container me-11 rounded-2xl shadow-sm">
-          <Image className="aspect-video w-auto h-full rounded-2xl object-cover object-center" src={hospitalImage ? hospitalImage : siloam} height={300} width={200} alt="${data.nama}" />
-        </div>
         <div className="bg-white shadow-lg rounded-lg flex-1 border border-gray-200">
           <div className="flex mb-3">
-            <h2 className="flex-1 font-sans font-bold text-3xl ms-5 my-5 text-black">Hospital Data</h2>
-            <button id="edit" className="me-8 justify-end items-end">
-              <Image id="img_btn" src="" className="size-6" alt="" width={200} height={200} />
+            <h2 className="flex-1 font-sans font-bold text-3xl ms-5 my-5 text-black">Add Hospital Data</h2>
+            <button className="me-8 justify-end items-end" onClick={closeHandler}>
+              <Image src={CloseIcon} className="size-6" alt="Close icons created by ariefstudio - Flaticon" width={300} height={300} />
             </button>
           </div>
           <div className="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
@@ -164,10 +167,10 @@ export default function AddHospitalPage() {
           </div>
           <div className="grid grid-cols-2 gap-4 px-5 object-center mb-4 sm:mb-5">
             <button className="w-auto h-9 rounded-md bg-red-500 text-white font-semibold" onClick={cancelHandler}>
-              Batal
+              Cancel
             </button>
             <button className="w-auto h-9 rounded-md bg-green-500 text-white font-semibold" onClick={saveHandler}>
-              Simpan
+              Save
             </button>
           </div>
         </div>

@@ -1,15 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
 
-const ProfileButton = () => {
+const LogOutButton = () => {
+  const logutHandler = (e) => {
+    e.preventDefault();
+    localStorage.clear();
+  };
   return (
-    <div className="flex justify-center items-center border border-black">
-      <p>Username</p>
-      <button className="w-11 h-11 shadow-sm rounded-full border border-gray-200 hover:shadow-lg cl" onClick={Cookies.remove("token")}></button>
-    </div>
+    <button className="w-20 h-11 shadow-sm rounded-lg border border-gray-200 hover:shadow-lg" onClick={logutHandler}>
+      {" "}
+      Logout{" "}
+    </button>
   );
 };
 
@@ -17,7 +20,7 @@ const AuthButton = () => {
   return (
     <div className="grid grid-cols-2 gap-3">
       <Link href="/login">
-        <button className="w-20 h-11 shadow-sm rounded-lg border border-gray-200 hover:shadow-lg cl"> Login </button>
+        <button className="w-20 h-11 shadow-sm rounded-lg border border-gray-200 hover:shadow-lg"> Login </button>
       </Link>
       <Link href="/register">
         <button className="w-20 h-11 shadow-sm bg-blue-300 rounded-lg border border-gray-200"> Sign Up </button>
@@ -25,16 +28,15 @@ const AuthButton = () => {
     </div>
   );
 };
-export default function Navbar() {
+export default function Navbar({ token }) {
   const [loggedIn, setLoggedIn] = useState(false);
-  const token = Cookies.get("token");
+
   useEffect(() => {
-    if (token) {
+    if (token != null || token != undefined) {
       setLoggedIn(true);
-    } else {
-      setLoggedIn(false);
     }
   }, [token]);
+  
   return (
     <>
       <nav className="bg-white border-gray-200 pb-2 shadow-md">
@@ -83,7 +85,7 @@ export default function Navbar() {
               </li>
             </ul>
           </div>
-          <div className="space-x-3 font-medium text-sm">{loggedIn ? ProfileButton() : AuthButton()}</div>
+          <div className="space-x-3 font-medium text-sm">{loggedIn ? LogOutButton() : AuthButton()}</div>
         </div>
       </nav>
     </>

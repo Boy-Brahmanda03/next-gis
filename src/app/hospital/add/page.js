@@ -5,9 +5,12 @@ import Image from "next/image";
 import CloseIcon from "/public/close-icon.png";
 import { useRouter } from "next/navigation";
 
-async function processData(formData, url) {
+async function processData(formData, url, token) {
   const res = await fetch(url + "/hospital/", {
     method: "POST",
+    headers: {
+      Authorization: "Bearer " + token,
+    },
     body: formData,
   });
   return res.json();
@@ -23,6 +26,7 @@ export default function AddHospitalPage() {
   const [hospitalLng, setHospitalLng] = useState(null);
   const fileInputRef = useRef(null);
   const r = useRouter();
+  const token = localStorage.getItem("token");
 
   const closeHandler = () => {
     r.back();
@@ -58,9 +62,11 @@ export default function AddHospitalPage() {
     formData.append("type", hospitalType);
     formData.append("picture", hospitalImageFile);
     console.log("FormData in saveHandler:", formData);
-    const res = await processData(formData, url);
+    const res = await processData(formData, url, token);
     if (res.success) {
+      r.prefetch("/hospital");
       alert(res.message);
+      r.push("/hospital");
     }
   };
 

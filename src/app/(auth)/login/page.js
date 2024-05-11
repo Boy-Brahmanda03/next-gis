@@ -4,49 +4,44 @@ import Image from "next/image";
 import mockupLogin from "/public/login-bro.png";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
+
+async function login(email, password, url) {
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password }),
+  });
+  const data = await res.json();
+  console.log(data);
+  if (!data.success) {
+    throw new Error(data.message);
+  }
+  return data;
+}
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const loginHandler = (e) => {
+  const loginHandler = async (e) => {
     e.preventDefault();
-    const url = process.env.NEXT_PUBLIC_API_URL;
-    fetch(url + "/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        if (!data.success) {
-          console.log("Login Gagal");
-        }
-        console.log(data.data.token);
-        const token = Cookies.get();
-        console.log();
-        localStorage.setItem("token", data.data.token);
-        Cookies.set("token", data.data.token);
-        router.push("/");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const url = "http://127.0.0.1:8000/api/login";
+    const loginData = await login(email, password, url);
+    alert(loginData.message);
+    localStorage.setItem("token", loginData.data.token);
+    router.push("/");
   };
 
   return (
     <>
       <div className="flex h-screen items-center justify-center">
         <div className="w-7/12 h-4/6 bg-white shadow-lg border border-gray-200 rounded-lg">
-          <div className="grid grid-cols-2 h-full items-center justify-center p-7">
-            <div className="h-full mx-auto">
-              <Image src={mockupLogin} alt="mockup" width={400} />
+          <div className="grid grid-cols-1 lg:grid-cols-2 h-full items-center justify-center p-7">
+            <div className="h-full mx-auto hidden lg:block">
+              <Image src={mockupLogin} alt="mockup" width={400} priority={true} />
             </div>
             <div className="p-3 h-full content-center justify-center">
               <h1 className="text-center max-w-sm mx-auto text-4xl font-semibold text-black">Login</h1>

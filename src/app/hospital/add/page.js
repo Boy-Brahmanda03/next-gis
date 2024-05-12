@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import CloseIcon from "/public/close-icon.png";
 import { useRouter } from "next/navigation";
@@ -26,7 +26,11 @@ export default function AddHospitalPage() {
   const [hospitalLng, setHospitalLng] = useState("");
   const fileInputRef = useRef("");
   const r = useRouter();
-  const token = localStorage.getItem("token");
+  const [token, setToken] = "";
+
+  useEffect(() => {
+    setToken(localStorage.getItem("token"));
+  });
 
   const closeHandler = () => {
     r.back();

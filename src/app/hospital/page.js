@@ -1,6 +1,6 @@
 "use client";
 
-import Navbar from "../navbar";
+import Navbar from "../../components/navbar";
 import Card from "@/app/hospital/card";
 import Button from "./button";
 import { useEffect, useState } from "react";
@@ -15,7 +15,7 @@ export default function Hospital() {
 
   console.log(token);
   useEffect(() => {
-    fetch("http://gis_2105551149.local.net/api/hospital", {
+    fetch("http://localhost/api/hospital", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + token,

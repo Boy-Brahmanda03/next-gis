@@ -9,7 +9,7 @@ async function processData(id, formData, url, token) {
   const res = await fetch(url + "/hospital/" + id, {
     method: "POST",
     headers: {
-      Authorization: "Bearer" + token,
+      Authorization: "Bearer " + token,
     },
     body: formData,
   });
@@ -20,7 +20,7 @@ async function deleteData(id, url, token) {
   const res = await fetch(url + "/hospital/" + id, {
     method: "DELETE",
     headers: {
-      Authorization: "Bearer" + token,
+      Authorization: "Bearer " + token,
     },
   });
   return res.json();
@@ -76,7 +76,7 @@ export default function Form({ data }) {
   };
 
   const deleteHandler = async () => {
-    const url = "http://localhost:8000/api";
+    const url = "http://gis_2105551149.local.net/api";
     const res = await deleteData(data.id, url, token);
     if (res.success) {
       r.prefetch("/hospital");

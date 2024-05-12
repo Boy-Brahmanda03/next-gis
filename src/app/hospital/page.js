@@ -15,7 +15,7 @@ export default function Hospital() {
 
   console.log(token);
   useEffect(() => {
-    fetch("http://gis_2105551149.local.net//hospital", {
+    fetch("http://gis_2105551149.local.net/api/hospital", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + token,

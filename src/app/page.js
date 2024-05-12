@@ -5,11 +5,16 @@ import Hero from "./hero";
 import Footer from "./footer";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const MyMap = dynamic(() => import("./map/map"), { ssr: false });
 
 export default function Home() {
-  const token = localStorage.getItem("token");
+  const [token, setToken] = useState();
+
+  useEffect(() => {
+    setToken(localStorage.getItem("token"));
+  }, []);
 
   return (
     <>

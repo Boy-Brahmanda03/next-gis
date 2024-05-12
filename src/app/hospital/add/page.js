@@ -131,8 +131,8 @@ export default function AddHospitalPage() {
               <label className="block mb-2 text-lg font-medium">Lat</label>
               <input
                 type="text"
-                name="tipe"
-                id="tipe"
+                name="lat"
+                id="lat"
                 className="border border-gray-300 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                 value={hospitalLat}
                 onChange={(e) => {
@@ -146,8 +146,8 @@ export default function AddHospitalPage() {
               <label className="block mb-2 text-lg font-medium">Longitude</label>
               <input
                 type="text"
-                name="tipe"
-                id="tipe"
+                name="lng"
+                id="lng"
                 className="border border-gray-300 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                 value={hospitalLng}
                 onChange={(e) => {

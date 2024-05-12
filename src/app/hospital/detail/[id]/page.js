@@ -4,7 +4,6 @@ import Navbar from "@/app/navbar";
 import Form from "./form";
 import { useEffect, useState } from "react";
 
-
 export default function DetailPage({ params }) {
   const [token, setToken] = useState();
   const [hospital, setHospital] = useState();
@@ -32,7 +31,7 @@ export default function DetailPage({ params }) {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, [token]);
+  }, [token, params.id]);
 
   console.log(hospital);
   return (

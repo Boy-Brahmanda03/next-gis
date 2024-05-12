@@ -64,9 +64,8 @@ export default function AddHospitalPage() {
     console.log("FormData in saveHandler:", formData);
     const res = await processData(formData, url, token);
     if (res.success) {
-      r.prefetch("/hospital");
       alert(res.message);
-      r.push("/hospital");
+      window.location.href = "/hospital";
     }
   };
 

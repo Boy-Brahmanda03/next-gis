@@ -1,9 +1,9 @@
 "use client";
 
-import Navbar from "../../components/navbar";
 import Card from "@/app/hospital/card";
 import Button from "./button";
 import { useEffect, useState } from "react";
+import Navbar from "../navbar";
 
 export default function Hospital() {
   const [token, setToken] = useState();

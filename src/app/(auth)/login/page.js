@@ -32,7 +32,7 @@ export default function Login() {
     const loginData = await login(email, password, url);
     alert(loginData.message);
     localStorage.setItem("token", loginData.data.token);
-    router.push("/");
+    window.location.href = "/";
   };
 
   return (

@@ -17,14 +17,14 @@ async function processData(formData, url, token) {
 }
 
 export default function AddHospitalPage() {
-  const [hospitalName, setHospitalName] = useState(null);
-  const [hospitalAddress, setHospitalAddress] = useState(null);
-  const [hospitalType, setHospitalType] = useState(null);
-  const [hospitalImage, setHospitalImage] = useState(null);
-  const [hospitalImageFile, setHospitalImageFile] = useState(null);
-  const [hospitalLat, setHospitalLat] = useState(null);
-  const [hospitalLng, setHospitalLng] = useState(null);
-  const fileInputRef = useRef(null);
+  const [hospitalName, setHospitalName] = useState("");
+  const [hospitalAddress, setHospitalAddress] = useState("");
+  const [hospitalType, setHospitalType] = useState("");
+  const [hospitalImage, setHospitalImage] = useState("");
+  const [hospitalImageFile, setHospitalImageFile] = useState("");
+  const [hospitalLat, setHospitalLat] = useState("");
+  const [hospitalLng, setHospitalLng] = useState("");
+  const fileInputRef = useRef("");
   const r = useRouter();
   const token = localStorage.getItem("token");
 
@@ -33,12 +33,12 @@ export default function AddHospitalPage() {
   };
 
   const cancelHandler = () => {
-    setHospitalName(null);
-    setHospitalAddress(null);
-    setHospitalType(null);
-    setHospitalImage(null);
-    setHospitalLat(null);
-    setHospitalLng(null);
+    setHospitalName("");
+    setHospitalAddress("");
+    setHospitalType("");
+    setHospitalImage("");
+    setHospitalLat("");
+    setHospitalLng("");
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }

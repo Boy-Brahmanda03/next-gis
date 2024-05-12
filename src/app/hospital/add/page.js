@@ -54,7 +54,7 @@ export default function AddHospitalPage() {
 
   const saveHandler = async () => {
     const formData = new FormData();
-    const url = "http://localhost:8000/api";
+    const url = "http://gis_2105551149.local.net/";
     formData.append("h_name", hospitalName);
     formData.append("address", hospitalAddress);
     formData.append("lat", hospitalLat);

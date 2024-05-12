@@ -15,7 +15,7 @@ export default function DetailPage({ params }) {
 
   useEffect(() => {
     const id = params.id;
-    fetch("http://localhost:8000/api/hospital/" + id, {
+    fetch("http://gis_2105551149.local.net/hospital/" + id, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + token,

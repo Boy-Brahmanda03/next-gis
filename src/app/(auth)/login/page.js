@@ -28,7 +28,7 @@ export default function Login() {
 
   const loginHandler = async (e) => {
     e.preventDefault();
-    const url = "http://127.0.0.1:8000/api/login";
+    const url = "http://gis_2105551149.local.net/api/login";
     const loginData = await login(email, password, url);
     alert(loginData.message);
     localStorage.setItem("token", loginData.data.token);

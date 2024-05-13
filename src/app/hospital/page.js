@@ -15,7 +15,7 @@ export default function Hospital() {
 
   console.log(token);
   useEffect(() => {
-    fetch("http://localhost/api/hospital", {
+    fetch("http://localhost:8000/api/hospital", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + token,

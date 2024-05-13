@@ -5,14 +5,6 @@ import { format } from "prettier";
 dotenv.config();
 
 const nextConfig = {
-  async rewrites() {
-    return [
-      {
-        source: "/api/:path*",
-        destination: "http://gis_2105551149.local.net:8000/api/:path*", // Proxy to your Laravel backend
-      },
-    ];
-  },
 };
 
 const env = {

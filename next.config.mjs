@@ -4,7 +4,16 @@ import { format } from "prettier";
 /** @type {import('next').NextConfig} */
 dotenv.config();
 
-const nextConfig = {};
+const nextConfig = {
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: "http://localhost:8000/api/:path*", // Ganti sesuai dengan URL aplikasi Laravel Anda
+      },
+    ];
+  },
+};
 
 const env = {
   API_BASE_URL: process.env.NEXT_PUBLIC_API_URL,

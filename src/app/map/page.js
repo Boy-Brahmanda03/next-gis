@@ -1,23 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Navbar from "../navbar";
+import Navbar from "../../components/navbar";
 import dynamic from "next/dynamic";
+import { getHospital } from "@/lib/api";
 
-const MyMap = dynamic(() => import("./map"), { ssr: false });
-
-async function getData() {
-  const url = process.env.NEXT_SERVER_PUBLIC_API_URL;
-  const res = await fetch(url + "/hospital", {
-    method: "GET",
-    cache: "no-store",
-  });
-
-  if (!res.ok) {
-    throw new Error("Error fetching data!");
-  }
-  return res.json();
-}
+const MyMap = dynamic(() => import("../../components/map"), { ssr: false });
 
 export default function MapPage() {
   const [token, setToken] = useState();
@@ -28,27 +16,17 @@ export default function MapPage() {
   }, []);
 
   useEffect(() => {
-    fetch("http://gis_2105551149.local.net/api/hospital", {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-      cache: "no-store",
-    })
-      .then((res) => {
-        console.log(res);
-        return res.json();
-      })
-      .then((data) => {
-        setHospitals(data);
-      });
+    getHospital(token).then((data) => {
+      console.log(data);
+      setHospitals(data);
+    });
   }, [token]);
 
   return (
     <>
       <div>
         <Navbar token={token} />
-        <div className="w-full h-screen p-20">{hospitals && hospitals.success ? <MyMap zoomSize={9.5} data={hospitals} /> : <p>salah cuy</p>}</div>
+        <div className="w-full h-screen">{hospitals && hospitals.success ? <MyMap zoomSize={9.5} data={hospitals} /> : <p>salah cuy</p>}</div>
       </div>
     </>
   );

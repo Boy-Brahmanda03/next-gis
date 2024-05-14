@@ -15,7 +15,6 @@ export default function Map({ zoomSize, data }) {
   let position = [];
   if (data != null) {
     position = data.data;
-    console.log(data);
   }
 
   const markerIcon = L.icon({
@@ -25,7 +24,7 @@ export default function Map({ zoomSize, data }) {
 
   return (
     <>
-      <MapContainer className="h-full rounded-xl" center={[-8.4095, 115.1889]} zoom={zoomSize} scrollWheelZoom={false}>
+      <MapContainer className="h-full" center={[-8.4095, 115.1889]} zoom={zoomSize} scrollWheelZoom={false}>
         <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <MarkerClusterGroup>
           {position.map((marker, index) => (

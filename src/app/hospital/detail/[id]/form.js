@@ -141,7 +141,7 @@ export default function Form({ data }) {
                 <button className="w-auto h-9 rounded-md bg-yellow-500 text-white font-semibold" onClick={cancelHandler}>
                   Batal
                 </button>
-                <button className="w-auto h-9 rounded-md bg-red-500 text-white font-semibold" onClick={cancelHandler}>
+                <button className="w-auto h-9 rounded-md bg-red-500 text-white font-semibold" onClick={deleteHandler}>
                   Delete
                 </button>
                 <button className="w-auto h-9 rounded-md bg-green-500 text-white font-semibold" onClick={saveHandler}>

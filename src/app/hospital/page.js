@@ -15,14 +15,10 @@ export default function Hospital() {
   }, []);
 
   useEffect(() => {
-    async () => {
-      try {
-        const result = await getHospital(token);
-        setHospitals(result);
-      } catch (err) {
-        console.log(err.message);
-      }
-    };
+    getHospital(token).then((data) => {
+      console.log(data);
+      setHospitals(data);
+    });
   }, [token]);
 
   console.log(hospitals);

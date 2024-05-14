@@ -4,27 +4,8 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import CloseIcon from "/public/close-icon.png";
+import { editHospital, deleteHospital } from "@/lib/api";
 
-async function processData(id, formData, url, token) {
-  const res = await fetch(url + "/hospital/" + id, {
-    method: "POST",
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-    body: formData,
-  });
-  return res.json();
-}
-
-async function deleteData(id, url, token) {
-  const res = await fetch(url + "/hospital/" + id, {
-    method: "DELETE",
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  });
-  return res.json();
-}
 
 export default function Form({ data }) {
   const [token, setToken] = useState();
@@ -60,14 +41,13 @@ export default function Form({ data }) {
 
   const saveHandler = async () => {
     const formData = new FormData();
-    const url = "http://gis_2105551149.local.net/api";
     formData.append("h_name", hospitalName);
     formData.append("address", hospitalAddress);
     formData.append("type", hospitalType);
     formData.append("picture", hospitalImageFile);
-    console.log("FormData in saveHandler:", formData);
-    const res = await processData(data.id, formData, url, token);
-    console.log(res);
+    // console.log("FormData in saveHandler:", formData);
+    const res = await editHospital(data.id, formData, token);
+    // console.log(res);
     if (res.success) {
       r.prefetch("/hospital");
       alert(res.message);
@@ -76,8 +56,7 @@ export default function Form({ data }) {
   };
 
   const deleteHandler = async () => {
-    const url = "http://gis_2105551149.local.net/api";
-    const res = await deleteData(data.id, url, token);
+    const res = await deleteHospital(data.id, token);
     if (res.success) {
       r.prefetch("/hospital");
       r.push("/hospital");

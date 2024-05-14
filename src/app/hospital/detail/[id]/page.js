@@ -1,8 +1,9 @@
 "use client";
 
-import Navbar from "@/app/navbar";
+import Navbar from "@/components/navbar";
 import Form from "./form";
 import { useEffect, useState } from "react";
+import { getHospitalById } from "@/lib/api";
 
 export default function DetailPage({ params }) {
   const [token, setToken] = useState();
@@ -14,23 +15,10 @@ export default function DetailPage({ params }) {
 
   useEffect(() => {
     const id = params.id;
-    fetch("http://gis_2105551149.local.net/api/hospital/" + id, {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-      cache: "no-store",
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        setHospital(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
+    getHospitalById(id, token).then((data) => {
+      setHospital(data);
+      // console.log(data);
+    });
   }, [token, params.id]);
 
   console.log(hospital);

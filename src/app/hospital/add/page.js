@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import CloseIcon from "/public/close-icon.png";
 import { useRouter } from "next/navigation";
+import { createHospital } from "@/lib/api";
 
 async function processData(formData, url, token) {
   const res = await fetch(url + "/hospital/", {
@@ -25,12 +26,12 @@ export default function AddHospitalPage() {
   const [hospitalLat, setHospitalLat] = useState("");
   const [hospitalLng, setHospitalLng] = useState("");
   const fileInputRef = useRef("");
+  const [token, setToken] = useState("");
   const r = useRouter();
-  const [token, setToken] = "";
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
-  });
+  }, []);
 
   const closeHandler = () => {
     r.back();
@@ -58,15 +59,14 @@ export default function AddHospitalPage() {
 
   const saveHandler = async () => {
     const formData = new FormData();
-    const url = "http://gis_2105551149.local.net/api";
     formData.append("h_name", hospitalName);
     formData.append("address", hospitalAddress);
     formData.append("lat", hospitalLat);
     formData.append("lng", hospitalLng);
     formData.append("type", hospitalType);
     formData.append("picture", hospitalImageFile);
-    console.log("FormData in saveHandler:", formData);
-    const res = await processData(formData, url, token);
+    // console.log("FormData in saveHandler:", formData);
+    const res = await createHospital(formData, token);
     if (res.success) {
       alert(res.message);
       window.location.href = "/hospital";

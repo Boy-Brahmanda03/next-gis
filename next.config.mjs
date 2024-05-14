@@ -5,6 +5,19 @@ import { format } from "prettier";
 dotenv.config();
 
 const nextConfig = {
+async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Referrer-Policy',
+            value: 'origin-when-cross-origin'
+          }
+        ],
+      },
+    ]
+  },
 };
 
 const env = {

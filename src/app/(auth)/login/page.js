@@ -4,22 +4,7 @@ import Image from "next/image";
 import mockupLogin from "/public/login-bro.png";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-
-async function login(email, password, url) {
-  const res = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email, password }),
-  });
-  const data = await res.json();
-  console.log(data);
-  if (!data.success) {
-    throw new Error(data.message);
-  }
-  return data;
-}
+import { login } from "@/lib/api"; 
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -28,8 +13,7 @@ export default function Login() {
 
   const loginHandler = async (e) => {
     e.preventDefault();
-    const url = "http://gis_2105551149.local.net/api/login";
-    const loginData = await login(email, password, url);
+    const loginData = await login(email, password);
     alert(loginData.message);
     localStorage.setItem("token", loginData.data.token);
     window.location.href = "/";
@@ -78,7 +62,6 @@ export default function Login() {
                     required
                   />
                 </div>
-
                 <button type="submit" className="mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center">
                   Login
                 </button>

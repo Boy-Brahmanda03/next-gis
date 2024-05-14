@@ -1,6 +1,6 @@
 export async function getHospital(token) {
-  console.log(process.env.NEXT_PUBLIC_LOCAL_API_URL + "/hospital");
-  const res = await fetch(process.env.NEXT_PUBLIC_LOCAL_API_URL + "/hospital", {
+  console.log(process.env.NEXT_PUBLIC_SERVER_API_URL + "/hospital");
+  const res = await fetch(process.env.NEXT_PUBLIC_SERVER_API_URL + "/hospital", {
     method: "GET",
     headers: {
       Authorization: "Bearer " + token,
@@ -11,7 +11,7 @@ export async function getHospital(token) {
 }
 
 export async function getHospitalById(id, token) {
-  const res = await fetch(process.env.NEXT_PUBLIC_LOCAL_API_URL + "/hospital/" + id, {
+  const res = await fetch(process.env.NEXT_PUBLIC_SERVER_API_URL + "/hospital/" + id, {
     method: "GET",
     headers: {
       Authorization: "Bearer " + token,
@@ -27,7 +27,7 @@ export async function getHospitalById(id, token) {
 }
 
 export async function createHospital(formData, token) {
-  const res = await fetch(process.env.NEXT_PUBLIC_LOCAL_API_URL + "/hospital/", {
+  const res = await fetch(process.env.NEXT_PUBLIC_SERVER_API_URL + "/hospital/", {
     method: "POST",
     headers: {
       Authorization: "Bearer " + token,
@@ -38,7 +38,7 @@ export async function createHospital(formData, token) {
 }
 
 export async function editHospital(id, formData, token) {
-  const res = await fetch(process.env.NEXT_PUBLIC_LOCAL_API_URL + "/hospital/" + id, {
+  const res = await fetch(process.env.NEXT_PUBLIC_SERVER_API_URL + "/hospital/" + id, {
     method: "POST",
     headers: {
       Authorization: "Bearer " + token,
@@ -49,7 +49,7 @@ export async function editHospital(id, formData, token) {
 }
 
 export async function deleteHospital(id, token) {
-  const res = await fetch(process.env.NEXT_PUBLIC_LOCAL_API_URL + "/hospital/" + id, {
+  const res = await fetch(process.env.NEXT_PUBLIC_SERVER_API_URL + "/hospital/" + id, {
     method: "DELETE",
     headers: {
       Authorization: "Bearer " + token,
@@ -59,7 +59,7 @@ export async function deleteHospital(id, token) {
 }
 
 export async function register(name, email, password) {
-  const res = await fetch(process.env.NEXT_PUBLIC_LOCAL_API_URL + "/register", {
+  const res = await fetch(process.env.NEXT_PUBLIC_SERVER_API_URL + "/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -70,7 +70,7 @@ export async function register(name, email, password) {
 }
 
 export async function login(email, password) {
-  const res = await fetch(process.env.NEXT_PUBLIC_LOCAL_API_URL + "/login", {
+  const res = await fetch(process.env.NEXT_PUBLIC_SERVER_API_URL + "/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

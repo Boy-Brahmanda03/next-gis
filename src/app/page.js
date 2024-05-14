@@ -1,6 +1,6 @@
 "use client";
 
-import Navbar from "./navbar";
+import Navbar from "../components/navbar";
 import Hero from "./hero";
 import Footer from "./footer";
 import dynamic from "next/dynamic";

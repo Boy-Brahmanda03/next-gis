@@ -3,7 +3,8 @@
 import Card from "@/app/hospital/card";
 import Button from "./button";
 import { useEffect, useState } from "react";
-import Navbar from "../navbar";
+import Navbar from "../../components/navbar";
+import { getHospital } from "@/lib/api";
 
 export default function Hospital() {
   const [token, setToken] = useState();
@@ -13,29 +14,19 @@ export default function Hospital() {
     setToken(localStorage.getItem("token"));
   }, []);
 
-  console.log(token);
   useEffect(() => {
-    fetch("http://localhost:8000/api/hospital", {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + token,
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      cache: "no-store",
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        setHospitals(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
+    async () => {
+      try {
+        const result = await getHospital(token);
+        setHospitals(result);
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
   }, [token]);
 
   console.log(hospitals);
+
   return (
     <>
       <Navbar token={token} />

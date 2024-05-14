@@ -6,17 +6,6 @@ import CloseIcon from "/public/close-icon.png";
 import { useRouter } from "next/navigation";
 import { createHospital } from "@/lib/api";
 
-async function processData(formData, url, token) {
-  const res = await fetch(url + "/hospital/", {
-    method: "POST",
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-    body: formData,
-  });
-  return res.json();
-}
-
 export default function AddHospitalPage() {
   const [hospitalName, setHospitalName] = useState("");
   const [hospitalAddress, setHospitalAddress] = useState("");

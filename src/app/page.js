@@ -1,8 +1,8 @@
 "use client";
 
 import Navbar from "../components/navbar";
-import Hero from "./hero";
-import Footer from "./footer";
+import Hero from "../components/hero";
+import Footer from "../components/footer";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useState } from "react";

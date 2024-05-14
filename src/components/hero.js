@@ -4,7 +4,7 @@ import bimc from "/public/bimc.png";
 import suryaHusada from "/public/surya-husada.png";
 import siloam from "/public/siloam.png";
 import kasiIbu from "/public/kasih-ibu.png";
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -31,15 +31,15 @@ export default function Hero() {
             <Link href="#" className="flex justify-center items-center">
               <Image src={bimc} alt="BIMC Hospital" height={300} />
             </Link>
-            <a href="#" className="flex justify-center items-center">
+            <Link href="#" className="flex justify-center items-center">
               <Image src={suryaHusada} alt="Surya Husada Hospital" height={300} />
-            </a>
-            <a href="#" className="flex justify-center items-center">
+            </Link>
+            <Link href="#" className="flex justify-center items-center">
               <Image src={siloam} alt="Siloam Hospital" height={300} />
-            </a>
-            <a href="#" className="flex justify-center items-center">
+            </Link>
+            <Link href="#" className="flex justify-center items-center">
               <Image src={kasiIbu} alt="Kasih Ibu Hospital" height={300} />
-            </a>
+            </Link>
           </div>
         </div>
       </section>

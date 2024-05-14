@@ -5,6 +5,7 @@ import mockupLogin from "/public/login-bro.png";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { register } from "@/lib/api";
+import Link from "next/link";
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -96,6 +97,9 @@ export default function Register() {
               <button type="submit" className="mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center">
                 Sign Up
               </button>
+              <Link href="/login">
+                <p className="pt-4 text-sm font-regular text hover:to-blue-500">Already have account?</p>
+              </Link>
             </form>
           </div>
         </div>

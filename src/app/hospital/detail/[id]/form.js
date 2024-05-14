@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import CloseIcon from "/public/close-icon.png";
 import { editHospital, deleteHospital } from "@/lib/api";
 
-
 export default function Form({ data }) {
   const [token, setToken] = useState();
   const [hospitalName, setHospitalName] = useState(data.name);
@@ -29,6 +28,10 @@ export default function Form({ data }) {
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
+  };
+
+  const closeHandler = () => {
+    r.back();
   };
 
   const imageHandler = (e) => {
@@ -72,7 +75,7 @@ export default function Form({ data }) {
         <div className="bg-white shadow-lg rounded-lg flex-1 border border-gray-200">
           <div className="flex mb-3">
             <h2 className="flex-1 font-sans font-bold text-3xl ms-5 my-5 text-black">Hospital Data</h2>
-            <button className="me-8 justify-end items-end" onClick={deleteHandler}>
+            <button className="me-8 justify-end items-end" onClick={closeHandler}>
               <Image src={CloseIcon} className="size-6" alt="" width={200} height={200} />
             </button>
           </div>
@@ -134,14 +137,17 @@ export default function Form({ data }) {
                 required=""
                 accept="image/*"
               />
-            </div>
-            <div className="grid grid-cols-2 gap-4 px-5 object-center mt-4">
-              <button className="w-auto h-9 rounded-md bg-red-500 text-white font-semibold" onClick={cancelHandler}>
-                Batal
-              </button>
-              <button className="w-auto h-9 rounded-md bg-green-500 text-white font-semibold" onClick={saveHandler}>
-                Simpan
-              </button>
+              <div className="grid grid-cols-3 gap-4 px-5 object-center mt-4">
+                <button className="w-auto h-9 rounded-md bg-yellow-500 text-white font-semibold" onClick={cancelHandler}>
+                  Batal
+                </button>
+                <button className="w-auto h-9 rounded-md bg-red-500 text-white font-semibold" onClick={cancelHandler}>
+                  Delete
+                </button>
+                <button className="w-auto h-9 rounded-md bg-green-500 text-white font-semibold" onClick={saveHandler}>
+                  Simpan
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -5,18 +5,23 @@ import { format } from "prettier";
 dotenv.config();
 
 const nextConfig = {
-async headers() {
+  async headers() {
     return [
       {
-        source: '/(.*)',
+        source: "/(.*)",
         headers: [
           {
-            key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin'
-          }
+            key: "Referrer-Policy",
+            value: "origin-when-cross-origin",
+          },
+          // Set CORS header untuk semua rute
+          {
+            key: "Access-Control-Allow-Origin",
+            value: "http://localhost:8000", // Ganti dengan URL backend Laravel Anda
+          },
         ],
       },
-    ]
+    ];
   },
 };
 

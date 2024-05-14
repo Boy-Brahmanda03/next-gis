@@ -3,14 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3001",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start -p 3001",
     "lint": "next lint"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
-    "js-cookie": "^3.0.5",
     "leaflet": "^1.9.4",
     "next": "14.1.4",
     "react": "^18",
